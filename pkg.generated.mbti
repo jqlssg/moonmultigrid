@@ -6,6 +6,7 @@ import {
 }
 
 // Values
+pub fn smooth_jacobi(Operator, Field, Field, Int, omega? : Double) -> Field raise SolverError
 
 // Errors
 pub(all) suberror SolverError {
