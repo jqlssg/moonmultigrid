@@ -6,6 +6,8 @@ import {
 }
 
 // Values
+pub fn field_from_json(String) -> Field raise SolverError
+
 pub fn inject(Field) -> Field raise SolverError
 
 pub fn manufacture_discrete(Operator, Field) -> Manufactured raise SolverError
@@ -86,6 +88,8 @@ pub fn Field::patch(Self, Int, Int, Int, Int) -> Self raise SolverError
 pub fn Field::rms_error(Self, Self) -> Double raise SolverError
 pub fn Field::sample(Grid, (Double, Double) -> Double) -> Self raise SolverError
 pub fn Field::samples(Self) -> Array[Double]
+pub fn Field::to_csv(Self) -> String
+pub fn Field::to_json(Self) -> Json
 pub fn Field::with_value(Self, Int, Int, Double) -> Self raise SolverError
 pub fn Field::zero_boundary(Self) -> Self
 pub fn Field::zeros(Grid) -> Self
