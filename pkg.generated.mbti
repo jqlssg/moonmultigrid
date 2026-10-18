@@ -18,6 +18,8 @@ pub fn smooth_jacobi(Operator, Field, Field, Int, omega? : Double) -> Field rais
 
 pub fn smooth_symmetric(Operator, Field, Field, Int) -> Field raise SolverError
 
+pub fn solve(Problem, options? : SolveOptions, config? : CycleConfig, initial? : Field?) -> SolveReport raise SolverError
+
 // Errors
 pub(all) suberror SolverError {
   Invalid(String)
@@ -102,12 +104,14 @@ pub struct Hierarchy {
   coarse : CoarseSolver
 }
 pub fn Hierarchy::cycle(Self, Field, Field, config? : CycleConfig) -> Field raise SolverError
+pub fn Hierarchy::cycle_work(Self, config? : CycleConfig) -> Int raise SolverError
 pub fn Hierarchy::grid_complexity(Self) -> Double
 pub fn Hierarchy::grids(Self) -> Array[Grid]
 pub fn Hierarchy::level(Self, Int) -> Operator raise SolverError
 pub fn Hierarchy::levels(Self) -> Int
 pub fn Hierarchy::new(Operator, coarse_limit? : Int) -> Self raise SolverError
 pub fn Hierarchy::precondition(Self, Field, config? : CycleConfig) -> Field raise SolverError
+pub fn Hierarchy::solve(Self, Problem, options? : SolveOptions, config? : CycleConfig, initial? : Field?) -> SolveReport raise SolverError
 pub fn Hierarchy::solve_coarsest(Self, Field) -> Field raise SolverError
 
 pub struct Operator {
@@ -153,6 +157,40 @@ pub fn Smoother::apply(Self, Operator, Field, Field, Int) -> Field raise SolverE
 pub fn Smoother::equal(Self, Self) -> Bool
 pub fn Smoother::not_equal(Self, Self) -> Bool
 pub fn Smoother::to_repr(Self) -> @debug.Repr
+
+pub struct SolveOptions {
+  rtol : Double
+  atol : Double
+  max_iterations : Int
+  work_budget : Int
+}
+pub fn SolveOptions::new(rtol? : Double, atol? : Double, max_iterations? : Int, work_budget? : Int) -> Self raise SolverError
+
+pub struct SolveReport {
+  solution : Field
+  reason : StopReason
+  iterations : Int
+  work_units : Int
+  rhs_norm : Double
+  residuals : Array[Double]
+}
+pub fn SolveReport::converged(Self) -> Bool
+pub fn SolveReport::iterations(Self) -> Int
+pub fn SolveReport::reason(Self) -> StopReason
+pub fn SolveReport::relative_residual(Self) -> Double
+pub fn SolveReport::residual(Self) -> Double
+pub fn SolveReport::residual_history(Self) -> Array[Double]
+pub fn SolveReport::solution(Self) -> Field
+pub fn SolveReport::work_units(Self) -> Int
+
+pub(all) enum StopReason {
+  Converged
+  IterationLimit
+  WorkLimit
+} derive(Eq, @debug.Debug)
+pub fn StopReason::equal(Self, Self) -> Bool
+pub fn StopReason::not_equal(Self, Self) -> Bool
+pub fn StopReason::to_repr(Self) -> @debug.Repr
 
 // Type aliases
 
