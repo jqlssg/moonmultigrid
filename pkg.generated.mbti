@@ -64,9 +64,11 @@ pub struct Field {
 pub fn Field::add(Self, Self, scale? : Double) -> Self raise SolverError
 pub fn Field::boundary_only(Self) -> Self
 pub fn Field::dot(Self, Self) -> Double raise SolverError
+pub fn Field::from_interior(Grid, Array[Double]) -> Self raise SolverError
 pub fn Field::get(Self, Int, Int) -> Double raise SolverError
 pub fn Field::grid(Self) -> Grid
 pub fn Field::interior_norm(Self) -> Double
+pub fn Field::interior_values(Self) -> Array[Double]
 pub fn Field::interpolate(Self, Double, Double) -> Double raise SolverError
 pub fn Field::map(Self, (Double) -> Double) -> Self raise SolverError
 pub fn Field::max_abs(Self) -> Double
@@ -125,6 +127,14 @@ pub fn Hierarchy::precondition(Self, Field, config? : CycleConfig) -> Field rais
 pub fn Hierarchy::solve(Self, Problem, options? : SolveOptions, config? : CycleConfig, initial? : Field?) -> SolveReport raise SolverError
 pub fn Hierarchy::solve_coarsest(Self, Field) -> Field raise SolverError
 
+pub struct InteriorMatrix {
+  grid : Grid
+  entries : Array[(Int, Int, Double)]
+}
+pub fn InteriorMatrix::dimension(Self) -> Int
+pub fn InteriorMatrix::entries(Self) -> Array[(Int, Int, Double)]
+pub fn InteriorMatrix::multiply(Self, Array[Double]) -> Array[Double] raise SolverError
+
 pub struct Operator {
   grid : Grid
   conductivity : Field
@@ -141,6 +151,7 @@ pub fn Operator::constant(Grid, conductivity? : Double, reaction? : Double) -> S
 pub fn Operator::contrast(Self) -> Double
 pub fn Operator::flux(Self, Field) -> Flux raise SolverError
 pub fn Operator::grid(Self) -> Grid
+pub fn Operator::interior_matrix(Self, max_entries? : Int) -> InteriorMatrix raise SolverError
 pub fn Operator::new(Field, reaction? : Double) -> Self raise SolverError
 pub fn Operator::reaction(Self) -> Double
 pub fn Operator::residual(Self, Field, Field) -> Field raise SolverError
