@@ -19,6 +19,25 @@ pub fn SolverError::not_equal(Self, Self) -> Bool
 pub fn SolverError::to_repr(Self) -> @debug.Repr
 
 // Types and methods
+pub struct Field {
+  grid : Grid
+  values : Array[Double]
+}
+pub fn Field::add(Self, Self, scale? : Double) -> Self raise SolverError
+pub fn Field::dot(Self, Self) -> Double raise SolverError
+pub fn Field::get(Self, Int, Int) -> Double raise SolverError
+pub fn Field::grid(Self) -> Grid
+pub fn Field::interior_norm(Self) -> Double
+pub fn Field::interpolate(Self, Double, Double) -> Double raise SolverError
+pub fn Field::map(Self, (Double) -> Double) -> Self raise SolverError
+pub fn Field::max_abs(Self) -> Double
+pub fn Field::new(Grid, Array[Double]) -> Self raise SolverError
+pub fn Field::rms_error(Self, Self) -> Double raise SolverError
+pub fn Field::sample(Grid, (Double, Double) -> Double) -> Self raise SolverError
+pub fn Field::samples(Self) -> Array[Double]
+pub fn Field::with_value(Self, Int, Int, Double) -> Self raise SolverError
+pub fn Field::zeros(Grid) -> Self
+
 pub struct Grid {
   nx : Int
   ny : Int
