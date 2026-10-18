@@ -58,6 +58,25 @@ pub fn Grid::spacing(Self) -> (Double, Double)
 pub fn Grid::to_repr(Self) -> @debug.Repr
 pub fn Grid::unknowns(Self) -> Int
 
+pub struct Operator {
+  grid : Grid
+  conductivity : Field
+  reaction : Double
+  west : Array[Double]
+  east : Array[Double]
+  south : Array[Double]
+  north : Array[Double]
+  diagonal : Array[Double]
+}
+pub fn Operator::apply(Self, Field) -> Field raise SolverError
+pub fn Operator::conductivity(Self) -> Field
+pub fn Operator::constant(Grid, conductivity? : Double, reaction? : Double) -> Self raise SolverError
+pub fn Operator::grid(Self) -> Grid
+pub fn Operator::new(Field, reaction? : Double) -> Self raise SolverError
+pub fn Operator::reaction(Self) -> Double
+pub fn Operator::residual(Self, Field, Field) -> Field raise SolverError
+pub fn Operator::stencil(Self, Int, Int) -> (Double, Double, Double, Double, Double) raise SolverError
+
 // Type aliases
 
 // Traits
