@@ -105,6 +105,7 @@ pub struct Hierarchy {
 }
 pub fn Hierarchy::cycle(Self, Field, Field, config? : CycleConfig) -> Field raise SolverError
 pub fn Hierarchy::cycle_work(Self, config? : CycleConfig) -> Int raise SolverError
+pub fn Hierarchy::full_multigrid(Self, Problem, cycles_per_level? : Int, config? : CycleConfig) -> Field raise SolverError
 pub fn Hierarchy::grid_complexity(Self) -> Double
 pub fn Hierarchy::grids(Self) -> Array[Grid]
 pub fn Hierarchy::level(Self, Int) -> Operator raise SolverError
