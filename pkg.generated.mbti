@@ -24,6 +24,7 @@ pub struct Field {
   values : Array[Double]
 }
 pub fn Field::add(Self, Self, scale? : Double) -> Self raise SolverError
+pub fn Field::boundary_only(Self) -> Self
 pub fn Field::dot(Self, Self) -> Double raise SolverError
 pub fn Field::get(Self, Int, Int) -> Double raise SolverError
 pub fn Field::grid(Self) -> Grid
@@ -36,6 +37,7 @@ pub fn Field::rms_error(Self, Self) -> Double raise SolverError
 pub fn Field::sample(Grid, (Double, Double) -> Double) -> Self raise SolverError
 pub fn Field::samples(Self) -> Array[Double]
 pub fn Field::with_value(Self, Int, Int, Double) -> Self raise SolverError
+pub fn Field::zero_boundary(Self) -> Self
 pub fn Field::zeros(Grid) -> Self
 
 pub struct Grid {
@@ -76,6 +78,22 @@ pub fn Operator::new(Field, reaction? : Double) -> Self raise SolverError
 pub fn Operator::reaction(Self) -> Double
 pub fn Operator::residual(Self, Field, Field) -> Field raise SolverError
 pub fn Operator::stencil(Self, Int, Int) -> (Double, Double, Double, Double, Double) raise SolverError
+
+pub struct Problem {
+  operator : Operator
+  source : Field
+  boundary : Field
+  rhs : Field
+}
+pub fn Problem::boundary(Self) -> Field
+pub fn Problem::boundary_error(Self, Field) -> Double raise SolverError
+pub fn Problem::correction(Self, Field) -> Field raise SolverError
+pub fn Problem::effective_rhs(Self) -> Field
+pub fn Problem::new(Operator, Field, Field) -> Self raise SolverError
+pub fn Problem::operator(Self) -> Operator
+pub fn Problem::residual(Self, Field) -> Field raise SolverError
+pub fn Problem::restore(Self, Field) -> Field raise SolverError
+pub fn Problem::source(Self) -> Field
 
 // Type aliases
 
