@@ -72,7 +72,7 @@ implementation: it supports mature demand/feasibility, not a compatibility claim
 The basis is a five-point conservative nodal diffusion-reaction discretization,
 harmonic face means, full-weighting/bilinear transfer and symmetric smoothing.
 No source or fixtures copied. Independent small dense solve and manufactured
-polynomial/sine solutions verify algebra and discretization respectively.
+continuous quartic solutions verify algebra and discretization respectively.
 No participant expertise, interviews, speedup numbers or absolute uniqueness claimed.
 
 Limits: fuzzy registry matching, bounded indexed GitHub results, unpublished/private
@@ -81,3 +81,15 @@ One guessed DSP repository URL returned 404 and was corrected using public manif
 The hypre documentation URL was inaccessible and is not used as evidence.
 Recheck central behavior and package status before release; atomically reserved
 MoonMultigrid under jqlssg before implementation. See acceptance.md for scope.
+
+
+## Pre-release recheck, 2026-10-18
+
+Repeated `moon search multigrid --limit 100`: three fuzzy graph/multigraph
+matches (moon_dagre variants and loop_invariants_graph), not PDE hierarchies.
+GitHub indexed code `multigrid extension:mbt` returned 3 files,
+incomplete=false: the same terrain tiling and FlowLabLite citation files
+already inspected. No new direct substitute within these bounded results.
+Private/unindexed projects and post-review changes remain outside this evidence.
+The implementation retains the reserved geometric transfer/hierarchy/cycle scope;
+common CG is ancillary, not claimed algorithmic novelty.
