@@ -110,6 +110,7 @@ pub fn Hierarchy::grids(Self) -> Array[Grid]
 pub fn Hierarchy::level(Self, Int) -> Operator raise SolverError
 pub fn Hierarchy::levels(Self) -> Int
 pub fn Hierarchy::new(Operator, coarse_limit? : Int) -> Self raise SolverError
+pub fn Hierarchy::pcg(Self, Problem, options? : SolveOptions, config? : CycleConfig, initial? : Field?, preconditioned? : Bool) -> SolveReport raise SolverError
 pub fn Hierarchy::precondition(Self, Field, config? : CycleConfig) -> Field raise SolverError
 pub fn Hierarchy::solve(Self, Problem, options? : SolveOptions, config? : CycleConfig, initial? : Field?) -> SolveReport raise SolverError
 pub fn Hierarchy::solve_coarsest(Self, Field) -> Field raise SolverError
