@@ -78,6 +78,15 @@ pub fn Field::with_value(Self, Int, Int, Double) -> Self raise SolverError
 pub fn Field::zero_boundary(Self) -> Self
 pub fn Field::zeros(Grid) -> Self
 
+pub struct Flux {
+  grid : Grid
+  x : Array[Double]
+  y : Array[Double]
+}
+pub fn Flux::divergence(Self) -> Field raise SolverError
+pub fn Flux::x_faces(Self) -> Array[Double]
+pub fn Flux::y_faces(Self) -> Array[Double]
+
 pub struct Grid {
   nx : Int
   ny : Int
@@ -129,6 +138,8 @@ pub struct Operator {
 pub fn Operator::apply(Self, Field) -> Field raise SolverError
 pub fn Operator::conductivity(Self) -> Field
 pub fn Operator::constant(Grid, conductivity? : Double, reaction? : Double) -> Self raise SolverError
+pub fn Operator::contrast(Self) -> Double
+pub fn Operator::flux(Self, Field) -> Flux raise SolverError
 pub fn Operator::grid(Self) -> Grid
 pub fn Operator::new(Field, reaction? : Double) -> Self raise SolverError
 pub fn Operator::reaction(Self) -> Double
