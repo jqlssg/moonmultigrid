@@ -72,6 +72,15 @@ pub fn Grid::spacing(Self) -> (Double, Double)
 pub fn Grid::to_repr(Self) -> @debug.Repr
 pub fn Grid::unknowns(Self) -> Int
 
+pub struct Hierarchy {
+  operators : Array[Operator]
+}
+pub fn Hierarchy::grid_complexity(Self) -> Double
+pub fn Hierarchy::grids(Self) -> Array[Grid]
+pub fn Hierarchy::level(Self, Int) -> Operator raise SolverError
+pub fn Hierarchy::levels(Self) -> Int
+pub fn Hierarchy::new(Operator, coarse_limit? : Int) -> Self raise SolverError
+
 pub struct Operator {
   grid : Grid
   conductivity : Field
