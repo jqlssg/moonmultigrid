@@ -6,6 +6,12 @@ import {
 }
 
 // Values
+pub fn inject(Field) -> Field raise SolverError
+
+pub fn prolong(Field) -> Field raise SolverError
+
+pub fn restrict_full(Field) -> Field raise SolverError
+
 pub fn smooth_gauss_seidel(Operator, Field, Field, Int, reverse? : Bool) -> Field raise SolverError
 
 pub fn smooth_jacobi(Operator, Field, Field, Int, omega? : Double) -> Field raise SolverError
@@ -51,6 +57,7 @@ pub struct Grid {
   lx : Double
   ly : Double
 } derive(Eq, @debug.Debug)
+pub fn Grid::coarsen(Self) -> Self raise SolverError
 pub fn Grid::coordinate(Self, Int, Int) -> (Double, Double) raise SolverError
 pub fn Grid::equal(Self, Self) -> Bool
 pub fn Grid::index(Self, Int, Int) -> Int raise SolverError
