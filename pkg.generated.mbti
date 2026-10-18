@@ -8,6 +8,8 @@ import {
 // Values
 pub fn inject(Field) -> Field raise SolverError
 
+pub fn poisson_edit(Field, Field, mixed? : Bool, options? : SolveOptions) -> SolveReport raise SolverError
+
 pub fn prolong(Field) -> Field raise SolverError
 
 pub fn restrict_full(Field) -> Field raise SolverError
@@ -73,6 +75,8 @@ pub fn Field::interpolate(Self, Double, Double) -> Double raise SolverError
 pub fn Field::map(Self, (Double) -> Double) -> Self raise SolverError
 pub fn Field::max_abs(Self) -> Double
 pub fn Field::new(Grid, Array[Double]) -> Self raise SolverError
+pub fn Field::paste(Self, Self, Int, Int) -> Self raise SolverError
+pub fn Field::patch(Self, Int, Int, Int, Int) -> Self raise SolverError
 pub fn Field::rms_error(Self, Self) -> Double raise SolverError
 pub fn Field::sample(Grid, (Double, Double) -> Double) -> Self raise SolverError
 pub fn Field::samples(Self) -> Array[Double]
