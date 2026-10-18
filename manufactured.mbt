@@ -21,7 +21,7 @@ pub fn manufacture_discrete(
 /// Continuous forcing is intentionally NOT obtained by applying the stencil.
 pub fn manufacture_quartic(
   grid : Grid,
-  reaction? : Double = 0.0,
+  reaction~ : Double = 0.0,
 ) -> Manufactured raise SolverError {
   let operator = Operator::constant(grid, reaction~)
   let exact = Field::sample(grid, fn(x, y) { x * x * x * x + y * y * y * y })
@@ -55,7 +55,7 @@ pub fn Manufactured::error(
 pub fn refinement_order(
   coarse_error : Double,
   fine_error : Double,
-  ratio? : Double = 2.0,
+  ratio~ : Double = 2.0,
 ) -> Double raise SolverError {
   require_positive(coarse_error, "coarse error")
   require_positive(fine_error, "fine error")

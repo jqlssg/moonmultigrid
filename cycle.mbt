@@ -8,14 +8,14 @@ pub(all) enum CycleKind {
 pub struct CycleConfig {
   kind : CycleKind
   smoother : Smoother
-  sweeps : Int
+  sweeps : Int32
 }
 
 ///|
 pub fn CycleConfig::new(
-  kind? : CycleKind = V,
-  smoother? : Smoother = Jacobi(0.6666666666666666),
-  sweeps? : Int = 2,
+  kind~ : CycleKind = V,
+  smoother~ : Smoother = Jacobi(0.6666666666666666),
+  sweeps~ : Int32 = 2,
 ) -> CycleConfig raise SolverError {
   if sweeps < 1 || sweeps > 8 {
     raise Invalid("cycle smoothing sweeps must be in 1..8")
@@ -43,14 +43,14 @@ pub fn CycleConfig::smoother(self : CycleConfig) -> Smoother {
 }
 
 ///|
-pub fn CycleConfig::sweeps(self : CycleConfig) -> Int {
+pub fn CycleConfig::sweeps(self : CycleConfig) -> Int32 {
   self.sweeps
 }
 
 ///|
 fn Hierarchy::cycle_level(
   self : Hierarchy,
-  level : Int,
+  level : Int32,
   rhs : Field,
   initial : Field,
   config : CycleConfig,
@@ -80,7 +80,7 @@ pub fn Hierarchy::cycle(
   self : Hierarchy,
   rhs : Field,
   initial : Field,
-  config? : CycleConfig = CycleConfig::new(),
+  config~ : CycleConfig = CycleConfig::new(),
 ) -> Field raise SolverError {
   let g = self.operators[0].grid
   require_same(g, rhs.grid)
@@ -93,7 +93,7 @@ pub fn Hierarchy::cycle(
 pub fn Hierarchy::precondition(
   self : Hierarchy,
   rhs : Field,
-  config? : CycleConfig = CycleConfig::new(),
+  config~ : CycleConfig = CycleConfig::new(),
 ) -> Field raise SolverError {
   self.cycle(rhs, Field::zeros(rhs.grid), config~)
 }

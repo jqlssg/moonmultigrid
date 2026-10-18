@@ -4,10 +4,10 @@
 pub fn Hierarchy::pcg(
   self : Hierarchy,
   problem : Problem,
-  options? : SolveOptions = SolveOptions::new(),
-  config? : CycleConfig = CycleConfig::new(),
-  initial? : Field? = None,
-  preconditioned? : Bool = true,
+  options~ : SolveOptions = SolveOptions::new(),
+  config~ : CycleConfig = CycleConfig::new(),
+  initial~ : Field? = None,
+  preconditioned~ : Bool = true,
 ) -> SolveReport raise SolverError {
   self.check_problem(problem)
   if config.kind != V {

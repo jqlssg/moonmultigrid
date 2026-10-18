@@ -2,15 +2,18 @@
 
 ## Measured local evidence, 2026-10-18
 
-Windows: moon 0.1.20260920 (914d7da), moonc v0.10.14+7d59c7ec9-dev.
+Windows: isolated official stable moon 0.1.20261012 (748b63c),
+moonc v0.10.15+943464bfa (2026-10-12). The initial older-toolchain
+format drift was reproduced and corrected before release. CI checks out full
+history so the commit audit examines the actual implementation sequence.
 `moon info`, format, format check and strict check passed.
 wasm-gc/wasm/js each passed 25 tests and strict builds.
 Native locally unavailable: no system cc/gcc/clang. Actual native CI is mandatory.
 Three asserted public-API workflows run on JS; CI repeats them on every target.
 Independent pivoted dense oracle: 12/12 grids, JS maximum nodal absolute error
 1.78e-12, threshold 1e-9. Continuous quartic observed-order test accepts 1.9..2.2.
-`scripts/audit.py`: 19 core files, 1863 physical production MoonBit lines;
-1555 nonblank noncomment lines. Tests, commands, generated interfaces and docs
+`scripts/audit.py`: 19 core files, 1871 physical production MoonBit lines;
+1563 nonblank noncomment lines. Tests, commands, generated interfaces and docs
 are excluded. Production source is not generated.
 
 ## Conservative commit review

@@ -1,9 +1,9 @@
 ///|
 fn Hierarchy::nested_level(
   self : Hierarchy,
-  level : Int,
+  level : Int32,
   rhs : Field,
-  cycles : Int,
+  cycles : Int32,
   config : CycleConfig,
 ) -> Field raise SolverError {
   if level == self.operators.length() - 1 {
@@ -23,8 +23,8 @@ fn Hierarchy::nested_level(
 pub fn Hierarchy::full_multigrid(
   self : Hierarchy,
   problem : Problem,
-  cycles_per_level? : Int = 1,
-  config? : CycleConfig = CycleConfig::new(),
+  cycles_per_level~ : Int32 = 1,
+  config~ : CycleConfig = CycleConfig::new(),
 ) -> Field raise SolverError {
   self.check_problem(problem)
   if cycles_per_level < 1 || cycles_per_level > 8 {

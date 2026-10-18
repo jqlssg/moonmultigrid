@@ -23,7 +23,7 @@ fn harmonic(a : Double, b : Double) -> Double {
 ///|
 pub fn Operator::new(
   conductivity : Field,
-  reaction? : Double = 0.0,
+  reaction~ : Double = 0.0,
 ) -> Operator raise SolverError {
   require_finite(reaction, "reaction")
   if reaction < 0.0 {
@@ -60,8 +60,8 @@ pub fn Operator::new(
 ///|
 pub fn Operator::constant(
   grid : Grid,
-  conductivity? : Double = 1.0,
-  reaction? : Double = 0.0,
+  conductivity~ : Double = 1.0,
+  reaction~ : Double = 0.0,
 ) -> Operator raise SolverError {
   require_positive(conductivity, "conductivity")
   Operator::new(Field::sample(grid, fn(_x, _y) { conductivity }), reaction~)
@@ -86,8 +86,8 @@ pub fn Operator::reaction(self : Operator) -> Double {
 /// Returns (diagonal, west, east, south, north), with positive face magnitudes.
 pub fn Operator::stencil(
   self : Operator,
-  i : Int,
-  j : Int,
+  i : Int32,
+  j : Int32,
 ) -> (Double, Double, Double, Double, Double) raise SolverError {
   let p = self.grid.index(i, j)
   if self.grid.is_boundary(i, j) {
@@ -100,8 +100,8 @@ pub fn Operator::stencil(
 fn Operator::row(
   self : Operator,
   u : Array[Double],
-  i : Int,
-  j : Int,
+  i : Int32,
+  j : Int32,
 ) -> Double {
   let g = self.grid
   let p = g.at(i, j)

@@ -2,19 +2,19 @@
 /// Interior row-major COO, with row/column indices in 0..<unknowns.
 pub struct InteriorMatrix {
   grid : Grid
-  entries : Array[(Int, Int, Double)]
+  entries : Array[(Int32, Int32, Double)]
 }
 
 ///|
 pub fn Operator::interior_matrix(
   self : Operator,
-  max_entries? : Int = 1000000,
+  max_entries~ : Int32 = 1000000,
 ) -> InteriorMatrix raise SolverError {
   let g = self.grid
   if max_entries < 0 || g.unknowns() > max_entries / 5 {
     raise Budget("COO export exceeds entry budget")
   }
-  let entries : Array[(Int, Int, Double)] = []
+  let entries : Array[(Int32, Int32, Double)] = []
   for j in 1..<g.ny {
     for i in 1..<g.nx {
       let row = (j - 1) * (g.nx - 1) + i - 1
@@ -40,12 +40,12 @@ pub fn Operator::interior_matrix(
 ///|
 pub fn InteriorMatrix::entries(
   self : InteriorMatrix,
-) -> Array[(Int, Int, Double)] {
+) -> Array[(Int32, Int32, Double)] {
   self.entries.copy()
 }
 
 ///|
-pub fn InteriorMatrix::dimension(self : InteriorMatrix) -> Int {
+pub fn InteriorMatrix::dimension(self : InteriorMatrix) -> Int32 {
   self.grid.unknowns()
 }
 

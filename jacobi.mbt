@@ -1,5 +1,5 @@
 ///|
-fn validate_sweeps(g : Grid, sweeps : Int) -> Unit raise SolverError {
+fn validate_sweeps(g : Grid, sweeps : Int32) -> Unit raise SolverError {
   if sweeps < 0 {
     raise Invalid("sweeps must be nonnegative")
   }
@@ -14,8 +14,8 @@ pub fn smooth_jacobi(
   operator : Operator,
   rhs : Field,
   initial : Field,
-  sweeps : Int,
-  omega? : Double = 0.6666666666666666,
+  sweeps : Int32,
+  omega~ : Double = 0.6666666666666666,
 ) -> Field raise SolverError {
   require_same(operator.grid, rhs.grid)
   require_same(operator.grid, initial.grid)

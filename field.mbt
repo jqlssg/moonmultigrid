@@ -50,15 +50,19 @@ pub fn Field::samples(self : Field) -> Array[Double] {
 }
 
 ///|
-pub fn Field::get(self : Field, i : Int, j : Int) -> Double raise SolverError {
+pub fn Field::get(
+  self : Field,
+  i : Int32,
+  j : Int32,
+) -> Double raise SolverError {
   self.values[self.grid.index(i, j)]
 }
 
 ///|
 pub fn Field::with_value(
   self : Field,
-  i : Int,
-  j : Int,
+  i : Int32,
+  j : Int32,
   value : Double,
 ) -> Field raise SolverError {
   require_finite(value, "value")
@@ -87,7 +91,7 @@ fn require_same(a : Grid, b : Grid) -> Unit raise SolverError {
 pub fn Field::add(
   self : Field,
   other : Field,
-  scale? : Double = 1.0,
+  scale~ : Double = 1.0,
 ) -> Field raise SolverError {
   require_same(self.grid, other.grid)
   require_finite(scale, "scale")

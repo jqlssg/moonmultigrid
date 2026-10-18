@@ -8,7 +8,7 @@ pub struct Hierarchy {
 ///|
 pub fn Hierarchy::new(
   operator : Operator,
-  coarse_limit? : Int = 9,
+  coarse_limit~ : Int32 = 9,
 ) -> Hierarchy raise SolverError {
   if coarse_limit < 1 || coarse_limit > 81 {
     raise Invalid("coarse_limit must be between 1 and 81")
@@ -38,7 +38,7 @@ pub fn Hierarchy::new(
 }
 
 ///|
-pub fn Hierarchy::levels(self : Hierarchy) -> Int {
+pub fn Hierarchy::levels(self : Hierarchy) -> Int32 {
   self.operators.length()
 }
 
@@ -50,7 +50,7 @@ pub fn Hierarchy::grids(self : Hierarchy) -> Array[Grid] {
 ///|
 pub fn Hierarchy::level(
   self : Hierarchy,
-  level : Int,
+  level : Int32,
 ) -> Operator raise SolverError {
   if level < 0 || level >= self.operators.length() {
     raise Shape("hierarchy level outside range")

@@ -2,16 +2,16 @@
 pub struct SolveOptions {
   rtol : Double
   atol : Double
-  max_iterations : Int
-  work_budget : Int
+  max_iterations : Int32
+  work_budget : Int32
 }
 
 ///|
 pub fn SolveOptions::new(
-  rtol? : Double = 1.0e-8,
-  atol? : Double = 1.0e-12,
-  max_iterations? : Int = 100,
-  work_budget? : Int = 100000000,
+  rtol~ : Double = 1.0e-8,
+  atol~ : Double = 1.0e-12,
+  max_iterations~ : Int32 = 100,
+  work_budget~ : Int32 = 100000000,
 ) -> SolveOptions raise SolverError {
   require_finite(rtol, "rtol")
   require_finite(atol, "atol")
@@ -38,8 +38,8 @@ pub(all) enum StopReason {
 pub struct SolveReport {
   solution : Field
   reason : StopReason
-  iterations : Int
-  work_units : Int
+  iterations : Int32
+  work_units : Int32
   rhs_norm : Double
   residuals : Array[Double]
 }
@@ -60,12 +60,12 @@ pub fn SolveReport::converged(self : SolveReport) -> Bool {
 }
 
 ///|
-pub fn SolveReport::iterations(self : SolveReport) -> Int {
+pub fn SolveReport::iterations(self : SolveReport) -> Int32 {
   self.iterations
 }
 
 ///|
-pub fn SolveReport::work_units(self : SolveReport) -> Int {
+pub fn SolveReport::work_units(self : SolveReport) -> Int32 {
   self.work_units
 }
 
@@ -102,8 +102,8 @@ fn SolveOptions::threshold(self : SolveOptions, rhs_norm : Double) -> Double {
 /// Deterministic row-work units, not measured CPU operations or runtime.
 pub fn Hierarchy::cycle_work(
   self : Hierarchy,
-  config? : CycleConfig = CycleConfig::new(),
-) -> Int raise SolverError {
+  config~ : CycleConfig = CycleConfig::new(),
+) -> Int32 raise SolverError {
   let mut total = 0
   let mut visits = 1
   for level in 0..<self.operators.length() {
@@ -142,9 +142,9 @@ fn Hierarchy::check_problem(
 pub fn Hierarchy::solve(
   self : Hierarchy,
   problem : Problem,
-  options? : SolveOptions = SolveOptions::new(),
-  config? : CycleConfig = CycleConfig::new(),
-  initial? : Field? = None,
+  options~ : SolveOptions = SolveOptions::new(),
+  config~ : CycleConfig = CycleConfig::new(),
+  initial~ : Field? = None,
 ) -> SolveReport raise SolverError {
   self.check_problem(problem)
   let g = problem.operator.grid
@@ -197,9 +197,9 @@ pub fn Hierarchy::solve(
 ///|
 pub fn solve(
   problem : Problem,
-  options? : SolveOptions = SolveOptions::new(),
-  config? : CycleConfig = CycleConfig::new(),
-  initial? : Field? = None,
+  options~ : SolveOptions = SolveOptions::new(),
+  config~ : CycleConfig = CycleConfig::new(),
+  initial~ : Field? = None,
 ) -> SolveReport raise SolverError {
   Hierarchy::new(problem.operator).solve(problem, options~, config~, initial~)
 }

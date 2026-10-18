@@ -4,8 +4,8 @@
 pub fn poisson_edit(
   source : Field,
   target : Field,
-  mixed? : Bool = false,
-  options? : SolveOptions = SolveOptions::new(),
+  mixed~ : Bool = false,
+  options~ : SolveOptions = SolveOptions::new(),
 ) -> SolveReport raise SolverError {
   require_same(source.grid, target.grid)
   let op = Operator::constant(source.grid)
@@ -36,10 +36,10 @@ pub fn poisson_edit(
 /// Extract a rectangular nodal patch, preserving physical pixel spacing.
 pub fn Field::patch(
   self : Field,
-  left : Int,
-  bottom : Int,
-  nx : Int,
-  ny : Int,
+  left : Int32,
+  bottom : Int32,
+  nx : Int32,
+  ny : Int32,
 ) -> Field raise SolverError {
   let g = self.grid
   if left < 0 ||
@@ -71,8 +71,8 @@ pub fn Field::patch(
 pub fn Field::paste(
   self : Field,
   patch : Field,
-  left : Int,
-  bottom : Int,
+  left : Int32,
+  bottom : Int32,
 ) -> Field raise SolverError {
   let g = self.grid
   let p = patch.grid

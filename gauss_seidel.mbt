@@ -4,8 +4,8 @@ pub fn smooth_gauss_seidel(
   operator : Operator,
   rhs : Field,
   initial : Field,
-  sweeps : Int,
-  reverse? : Bool = false,
+  sweeps : Int32,
+  reverse~ : Bool = false,
 ) -> Field raise SolverError {
   require_same(operator.grid, rhs.grid)
   require_same(operator.grid, initial.grid)
@@ -36,7 +36,7 @@ pub fn smooth_symmetric(
   operator : Operator,
   rhs : Field,
   initial : Field,
-  pairs : Int,
+  pairs : Int32,
 ) -> Field raise SolverError {
   validate_sweeps(operator.grid, pairs)
   if pairs > 5000 {
@@ -62,7 +62,7 @@ pub fn Smoother::apply(
   operator : Operator,
   rhs : Field,
   initial : Field,
-  sweeps : Int,
+  sweeps : Int32,
 ) -> Field raise SolverError {
   match self {
     Jacobi(omega) => smooth_jacobi(operator, rhs, initial, sweeps, omega~)

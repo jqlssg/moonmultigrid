@@ -1,18 +1,18 @@
 ///|
 /// Rectangular nodal grid; nx/ny are interval counts, not point counts.
 pub struct Grid {
-  nx : Int
-  ny : Int
+  nx : Int32
+  ny : Int32
   lx : Double
   ly : Double
 } derive(@debug.Debug, Eq)
 
 ///|
 pub fn Grid::new(
-  nx : Int,
-  ny : Int,
-  lx? : Double = 1.0,
-  ly? : Double = 1.0,
+  nx : Int32,
+  ny : Int32,
+  lx~ : Double = 1.0,
+  ly~ : Double = 1.0,
 ) -> Grid raise SolverError {
   if nx < 2 || ny < 2 {
     raise Invalid("grid needs at least two intervals per axis")
@@ -31,12 +31,12 @@ pub fn Grid::new(
 }
 
 ///|
-pub fn Grid::shape(self : Grid) -> (Int, Int) {
+pub fn Grid::shape(self : Grid) -> (Int32, Int32) {
   (self.nx + 1, self.ny + 1)
 }
 
 ///|
-pub fn Grid::intervals(self : Grid) -> (Int, Int) {
+pub fn Grid::intervals(self : Grid) -> (Int32, Int32) {
   (self.nx, self.ny)
 }
 
@@ -51,17 +51,21 @@ pub fn Grid::spacing(self : Grid) -> (Double, Double) {
 }
 
 ///|
-pub fn Grid::size(self : Grid) -> Int {
+pub fn Grid::size(self : Grid) -> Int32 {
   (self.nx + 1) * (self.ny + 1)
 }
 
 ///|
-pub fn Grid::unknowns(self : Grid) -> Int {
+pub fn Grid::unknowns(self : Grid) -> Int32 {
   (self.nx - 1) * (self.ny - 1)
 }
 
 ///|
-pub fn Grid::index(self : Grid, i : Int, j : Int) -> Int raise SolverError {
+pub fn Grid::index(
+  self : Grid,
+  i : Int32,
+  j : Int32,
+) -> Int32 raise SolverError {
   if i < 0 || i > self.nx || j < 0 || j > self.ny {
     raise Shape("grid index outside domain")
   }
@@ -71,8 +75,8 @@ pub fn Grid::index(self : Grid, i : Int, j : Int) -> Int raise SolverError {
 ///|
 pub fn Grid::coordinate(
   self : Grid,
-  i : Int,
-  j : Int,
+  i : Int32,
+  j : Int32,
 ) -> (Double, Double) raise SolverError {
   let _ = self.index(i, j)
   let (hx, hy) = self.spacing()
@@ -80,12 +84,12 @@ pub fn Grid::coordinate(
 }
 
 ///|
-fn Grid::at(self : Grid, i : Int, j : Int) -> Int {
+fn Grid::at(self : Grid, i : Int32, j : Int32) -> Int32 {
   j * (self.nx + 1) + i
 }
 
 ///|
-pub fn Grid::is_boundary(self : Grid, i : Int, j : Int) -> Bool {
+pub fn Grid::is_boundary(self : Grid, i : Int32, j : Int32) -> Bool {
   i >= 0 &&
   i <= self.nx &&
   j >= 0 &&
