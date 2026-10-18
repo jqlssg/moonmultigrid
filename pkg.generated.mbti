@@ -8,9 +8,15 @@ import {
 // Values
 pub fn inject(Field) -> Field raise SolverError
 
+pub fn manufacture_discrete(Operator, Field) -> Manufactured raise SolverError
+
+pub fn manufacture_quartic(Grid, reaction? : Double) -> Manufactured raise SolverError
+
 pub fn poisson_edit(Field, Field, mixed? : Bool, options? : SolveOptions) -> SolveReport raise SolverError
 
 pub fn prolong(Field) -> Field raise SolverError
+
+pub fn refinement_order(Double, Double, ratio? : Double) -> Double raise SolverError
 
 pub fn restrict_full(Field) -> Field raise SolverError
 
@@ -138,6 +144,14 @@ pub struct InteriorMatrix {
 pub fn InteriorMatrix::dimension(Self) -> Int
 pub fn InteriorMatrix::entries(Self) -> Array[(Int, Int, Double)]
 pub fn InteriorMatrix::multiply(Self, Array[Double]) -> Array[Double] raise SolverError
+
+pub struct Manufactured {
+  problem : Problem
+  exact : Field
+}
+pub fn Manufactured::error(Self, Field) -> Double raise SolverError
+pub fn Manufactured::exact(Self) -> Field
+pub fn Manufactured::problem(Self) -> Problem
 
 pub struct Operator {
   grid : Grid
