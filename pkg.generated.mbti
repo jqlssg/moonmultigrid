@@ -1,0 +1,44 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "jqlssg/moonmultigrid"
+
+import {
+  "moonbitlang/core/debug",
+}
+
+// Values
+
+// Errors
+pub(all) suberror SolverError {
+  Invalid(String)
+  Shape(String)
+  Budget(String)
+  Numerical(String)
+} derive(Eq, @debug.Debug)
+pub fn SolverError::equal(Self, Self) -> Bool
+pub fn SolverError::not_equal(Self, Self) -> Bool
+pub fn SolverError::to_repr(Self) -> @debug.Repr
+
+// Types and methods
+pub struct Grid {
+  nx : Int
+  ny : Int
+  lx : Double
+  ly : Double
+} derive(Eq, @debug.Debug)
+pub fn Grid::coordinate(Self, Int, Int) -> (Double, Double) raise SolverError
+pub fn Grid::equal(Self, Self) -> Bool
+pub fn Grid::index(Self, Int, Int) -> Int raise SolverError
+pub fn Grid::intervals(Self) -> (Int, Int)
+pub fn Grid::is_boundary(Self, Int, Int) -> Bool
+pub fn Grid::lengths(Self) -> (Double, Double)
+pub fn Grid::new(Int, Int, lx? : Double, ly? : Double) -> Self raise SolverError
+pub fn Grid::not_equal(Self, Self) -> Bool
+pub fn Grid::shape(Self) -> (Int, Int)
+pub fn Grid::size(Self) -> Int
+pub fn Grid::spacing(Self) -> (Double, Double)
+pub fn Grid::to_repr(Self) -> @debug.Repr
+pub fn Grid::unknowns(Self) -> Int
+
+// Type aliases
+
+// Traits
