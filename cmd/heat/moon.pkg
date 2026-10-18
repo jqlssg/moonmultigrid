@@ -1,0 +1,5 @@
+import {
+  "jqlssg/moonmultigrid" @mg,
+}
+
+pkgtype(kind: "executable")
