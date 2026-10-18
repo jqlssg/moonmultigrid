@@ -2,6 +2,7 @@
 /// Rediscretized geometric levels, finest first. Nodal k is injected.
 pub struct Hierarchy {
   operators : Array[Operator]
+  coarse : CoarseSolver
 }
 
 ///|
@@ -33,7 +34,7 @@ pub fn Hierarchy::new(
       "terminal grid exceeds 81 dense coarse unknowns; use more coarsenable dimensions",
     )
   }
-  { operators, }
+  { operators, coarse: CoarseSolver::new(current), }
 }
 
 ///|

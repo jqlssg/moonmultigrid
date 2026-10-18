@@ -30,6 +30,13 @@ pub fn SolverError::not_equal(Self, Self) -> Bool
 pub fn SolverError::to_repr(Self) -> @debug.Repr
 
 // Types and methods
+pub struct CoarseSolver {
+  grid : Grid
+  lower : Array[Double]
+}
+pub fn CoarseSolver::new(Operator) -> Self raise SolverError
+pub fn CoarseSolver::solve(Self, Field) -> Field raise SolverError
+
 pub struct Field {
   grid : Grid
   values : Array[Double]
@@ -74,12 +81,14 @@ pub fn Grid::unknowns(Self) -> Int
 
 pub struct Hierarchy {
   operators : Array[Operator]
+  coarse : CoarseSolver
 }
 pub fn Hierarchy::grid_complexity(Self) -> Double
 pub fn Hierarchy::grids(Self) -> Array[Grid]
 pub fn Hierarchy::level(Self, Int) -> Operator raise SolverError
 pub fn Hierarchy::levels(Self) -> Int
 pub fn Hierarchy::new(Operator, coarse_limit? : Int) -> Self raise SolverError
+pub fn Hierarchy::solve_coarsest(Self, Field) -> Field raise SolverError
 
 pub struct Operator {
   grid : Grid
