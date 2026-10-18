@@ -6,7 +6,11 @@ import {
 }
 
 // Values
+pub fn smooth_gauss_seidel(Operator, Field, Field, Int, reverse? : Bool) -> Field raise SolverError
+
 pub fn smooth_jacobi(Operator, Field, Field, Int, omega? : Double) -> Field raise SolverError
+
+pub fn smooth_symmetric(Operator, Field, Field, Int) -> Field raise SolverError
 
 // Errors
 pub(all) suberror SolverError {
@@ -95,6 +99,15 @@ pub fn Problem::operator(Self) -> Operator
 pub fn Problem::residual(Self, Field) -> Field raise SolverError
 pub fn Problem::restore(Self, Field) -> Field raise SolverError
 pub fn Problem::source(Self) -> Field
+
+pub(all) enum Smoother {
+  Jacobi(Double)
+  SymmetricGaussSeidel
+} derive(Eq, @debug.Debug)
+pub fn Smoother::apply(Self, Operator, Field, Field, Int) -> Field raise SolverError
+pub fn Smoother::equal(Self, Self) -> Bool
+pub fn Smoother::not_equal(Self, Self) -> Bool
+pub fn Smoother::to_repr(Self) -> @debug.Repr
 
 // Type aliases
 
